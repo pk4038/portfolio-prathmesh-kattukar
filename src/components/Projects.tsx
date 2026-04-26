@@ -5,6 +5,7 @@ import chattrImg from "@/assets/chattr-preview.png";
 import notionaryImg from "@/assets/notionary-preview.png";
 import vanlifeImg from "@/assets/vanlife-preview.png";
 import assemblyImg from "@/assets/assembly-preview.png";
+import indiastackImg from "@/assets/indiastacks.png";
 
 const projects = [
   {
@@ -15,6 +16,15 @@ const projects = [
     stack: ["Next.js", "TypeScript", "Convex", "Clerk"],
     live: "https://chat-app-alpha-seven-86.vercel.app/",
     github: "https://github.com/pk4038/chattr-chatapp",
+  },
+  {
+    slug: "indiastacks-api",
+    image: indiastackImg,
+    name: "IndiaStack API",
+    description: "REST API for Indian pincode lookup, IFSC bank validation, and public holiday data.",
+    stack: ["Node.js", "Express", "Railway"],
+    live: "https://indiastack.netlify.app/",
+    github: "https://github.com/pk4038/india-api",
   },
   {
     slug: "notionary",
@@ -43,6 +53,7 @@ const projects = [
     live: "https://assemblyendgameprathmesh.netlify.app/",
     github: "https://github.com/pk4038/assembly-endgame",
   },
+  
 ];
 
 const Projects = () => {

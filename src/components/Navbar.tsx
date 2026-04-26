@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Moon, Sun, Palette, Menu, X } from "lucide-react";
+import { Moon, Sun, Palette } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#hero" },
@@ -35,7 +35,6 @@ const Navbar = () => {
     return true;
   });
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeAccent, setActiveAccent] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("accent-color") || accentColors[0].hsl;
@@ -97,7 +96,7 @@ const Navbar = () => {
           PK<span className="text-primary">.</span>
         </a>
 
-        <div className="hidden md:flex items-center gap-1">
+        <div className="flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -108,6 +107,7 @@ const Navbar = () => {
             </a>
           ))}
 
+          {/* Accent color picker */}
           <div className="relative ml-2" ref={paletteRef}>
             <button
               onClick={() => setPaletteOpen((o) => !o)}
@@ -148,100 +148,7 @@ const Navbar = () => {
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
-
-        <button
-          onClick={() => setMenuOpen((o) => !o)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors md:hidden"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
       </div>
-
-      {menuOpen && (
-        <div className="md:hidden">
-          <div
-            className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
-            onClick={() => setMenuOpen(false)}
-            aria-hidden="true"
-          />
-          <div
-            id="mobile-navigation"
-            className="fixed inset-y-0 right-0 z-50 w-72 overflow-y-auto bg-card/95 p-6 shadow-2xl border-l border-border backdrop-blur-xl"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <a
-                href="#hero"
-                className="text-lg font-bold tracking-tight text-foreground hover:text-primary transition-colors"
-                onClick={() => setMenuOpen(false)}
-              >
-                PK<span className="text-primary">.</span>
-              </a>
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors"
-                aria-label="Close menu"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-md px-3 py-3 text-sm font-medium text-foreground hover:bg-secondary/50 transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            <div className="mt-6 border-t border-border pt-4">
-              <button
-                onClick={toggleTheme}
-                className="flex w-full items-center justify-between rounded-md border border-border bg-transparent px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary/50 transition-colors"
-                aria-label="Toggle theme"
-              >
-                <span>{isDark ? "Light mode" : "Dark mode"}</span>
-                {isDark ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-            </div>
-
-            <div className="mt-3" ref={paletteRef}>
-              <button
-                onClick={() => setPaletteOpen((o) => !o)}
-                className="flex w-full items-center justify-between rounded-md border border-border bg-transparent px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary/50 transition-colors"
-                aria-label="Change accent color"
-              >
-                <span>Accent</span>
-                <Palette size={18} />
-              </button>
-
-              {paletteOpen && (
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                  {accentColors.map((color) => (
-                    <button
-                      key={color.name}
-                      onClick={() => selectAccent(color.hsl)}
-                      title={color.name}
-                      className={`h-10 w-full rounded-xl transition-transform duration-200 hover:scale-105 ${
-                        activeAccent === color.hsl ? "ring-2 ring-foreground ring-offset-2 ring-offset-card" : ""
-                      }`}
-                      style={{ backgroundColor: `hsl(${color.hsl})` }}
-                      aria-label={`Set accent to ${color.name}`}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };

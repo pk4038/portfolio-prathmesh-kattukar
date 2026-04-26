@@ -4,6 +4,7 @@ import StarField from "@/components/StarField";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import About from "@/components/About";
+import Stats from "@/components/Stats";
 import Contact from "@/components/Contact";
 import ScrollProgress from "@/components/ScrollProgress";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -17,6 +18,7 @@ const Index = () => {
       <Navbar />
       <StarField />
       <Hero />
+      <Stats />
       <Projects />
       <Skills />
       <About />

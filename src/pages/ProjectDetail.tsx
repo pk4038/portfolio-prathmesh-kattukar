@@ -4,6 +4,7 @@ import chattrImg from "@/assets/chattr-preview.png";
 import notionaryImg from "@/assets/notionary-preview.png";
 import vanlifeImg from "@/assets/vanlife-preview.png";
 import assemblyImg from "@/assets/assembly-preview.png";
+import indiastackImg from "@/assets/indiastacks.png";
 
 interface ProjectData {
   name: string;
@@ -30,6 +31,24 @@ const projects: Record<string, ProjectData> = {
     ],
     tools: ["Next.js", "TypeScript", "Convex", "Clerk", "Tailwind CSS", "Vercel", "React"],
   },
+  "indiastacks-api": {
+  name: "IndiaStack API",
+  description:
+    "REST API for Indian pincode lookup, IFSC bank validation, and public holiday data.",
+  stack: ["Node.js", "Express", "Railway", "HTML", "CSS"],
+  live: "https://indiastack.netlify.app/",
+  github: "https://github.com/pk4038/india-api",
+  image: indiastackImg,
+  overview: [
+    "IndiaStack API provides structured, developer-ready access to essential Indian data across three categories: pincode lookup, IFSC bank code validation, and public holiday data.",
+    "Pincode Lookup — Query any of 19,097 Indian pincodes and get back the city, district, state, and timezone in clean JSON. Perfect for auto-filling address forms, validating delivery zones, or enriching user data in any Indian-market application.",
+    "IFSC Bank Code Lookup — Validate and decode any of 164,836 IFSC codes across all Indian banks and branches. Returns bank name, branch, city, state, full address, and payment method support flags including IMPS, RTGS, NEFT, UPI, and SWIFT. Essential for any fintech, payments, or invoicing application operating in India.",
+    "Public Holiday Data — Get the full list of Indian public holidays for a given year, filterable by compulsory or restricted holiday type. Returns date, day of week, holiday name, and type. Useful for scheduling tools, payroll systems, HR platforms, delivery ETAs, and any application that needs to account for Indian working calendars.",
+    "All endpoints return consistent, clean JSON with proper error messages and HTTP status codes. Authentication is handled via an API key passed in the request header. The API is hosted on Railway with low-latency responses under 50ms.",
+    "Built for developers building products for the Indian market who want reliable, structured data without scraping government websites or maintaining their own datasets."
+  ],
+  tools: ["Node.js", "Express", "Railway", "HTML", "CSS"]
+},
   notionary: {
     name: "Notionary",
     description: "Full-stack notes app with rich editing and organization.",

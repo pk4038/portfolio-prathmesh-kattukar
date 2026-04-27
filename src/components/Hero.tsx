@@ -43,7 +43,7 @@ const Hero = () => {
 
         <div className="max-w-3xl">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 fade-up">
-            Hey, I'm <span className="text-primary">Prathmesh Kattukar</span>
+            Hey, I'm <span className="text-primary">Prathmesh</span>
           </h1>
           <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto mb-10 fade-up">
             I build fast, clean, real-world web apps

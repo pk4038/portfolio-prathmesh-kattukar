@@ -8,15 +8,35 @@ const links = [
   { icon: Twitter, label: "Twitter", href: "https://x.com/prathmesh4038" },
 ];
 
+// TODO: Paste your Formspree endpoint here once you've created a form at https://formspree.io
+// It looks like "https://formspree.io/f/xxxxxxxx"
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setSubmitted(false), 3000);
+    setStatus("loading");
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(e.target as HTMLFormElement),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -31,6 +51,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               type="text"
+              name="name"
               placeholder="Name"
               required
               value={form.name}
@@ -39,6 +60,7 @@ const Contact = () => {
             />
             <input
               type="email"
+              name="email"
               placeholder="Email"
               required
               value={form.email}
@@ -47,6 +69,7 @@ const Contact = () => {
             />
           </div>
           <textarea
+            name="message"
             placeholder="Message"
             required
             rows={5}
@@ -56,12 +79,18 @@ const Contact = () => {
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 mx-auto"
+            disabled={status === "loading"}
+            className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 mx-auto disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            <Send size={16} /> Send Message
+            <Send size={16} /> {status === "loading" ? "Sending..." : "Send Message"}
           </button>
-          {submitted && (
+          {status === "success" && (
             <p className="text-center text-sm text-green-400">Thanks! I'll get back to you soon.</p>
+          )}
+          {status === "error" && (
+            <p className="text-center text-sm text-red-400">
+              Something went wrong sending your message. Please try again or email me directly.
+            </p>
           )}
         </form>
 

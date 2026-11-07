@@ -10,7 +10,7 @@ const links = [
 
 // TODO: Paste your Formspree endpoint here once you've created a form at https://formspree.io
 // It looks like "https://formspree.io/f/xxxxxxxx"
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdnyqzd";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });

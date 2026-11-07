@@ -64,7 +64,7 @@ const Hero = () => {
             Contact Me
           </a>
           <a
-            href="/FullStack-PrathmeshKattukar.pdf"
+            href="/KattukarPrathmesh-FullstackResume.pdf"
             download
             className="px-6 py-3 border border-primary/30 text-primary font-medium rounded-md hover:bg-primary/10 transition-colors flex items-center gap-2"
           >
